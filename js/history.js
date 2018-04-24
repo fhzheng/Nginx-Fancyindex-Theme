@@ -27,7 +27,7 @@ if (!!(window.history && history.pushState)) {
   })();
 
   var updateCrumbs = function() {
-    window.document.title = window.location.pathname;
+    window.document.title = decodeURI(window.location.pathname);
     setTimeout(function () {
       var loc = window.location.pathname;
       var segments = loc.split('/');
@@ -78,7 +78,7 @@ if (!!(window.history && history.pushState)) {
       if (event.target.nodeName == 'A' && event.target.innerHTML.indexOf('/') !== -1) {
         event.preventDefault();
         swapPage(event.target.href);
-        var title = event.target.innerHTML;
+        var title = decodeURI(event.target.innerHTML);
         history.pushState({page: title}, title, event.target.href);
         updateCrumbs();
       }
